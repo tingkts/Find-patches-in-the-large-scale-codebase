@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Patch Finder</title>
+    <link rel="shortcut icon" href="${RES}/image/favicon.ico" type="image/vnd.microsoft.icon">
+    <link rel="stylesheet" href="${RES}/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="${RES}/css/theme.default.css" type="text/css" />
+    <link rel="stylesheet" href="${RES}/css/prettify.css" type="text/css" />
+    <link rel="stylesheet" href="${RES}/css/drawer.css" />
+    <link rel="stylesheet" href="${RES}/css/tooltipster.css" />
+    <script type="text/javascript" src="${RES}/js/jquery-latest.js"></script>
+    <script type="text/javascript" src="${RES}/js/jquery.tablesorter.min.js"></script>
+    <script type="text/javascript" src="${RES}/js/jquery.tablesorter.widgets.min.js"></script>
+    <script type="text/javascript" src="${RES}/js/simple-expand.min.js"></script>
+    <script type="text/javascript" src="${RES}/js/prettify/prettify.js"></script>
+    <script type="text/javascript" src="${RES}/js/jquery.sidr.min.js"></script>
+    <script type="text/javascript" src="${RES}/js/jquery.tooltipster.min.js"></script>
+    <script type="text/javascript" src="${RES}/js/utility.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        $("#tool-bar-fixed").html($("#tool-bar-top").html());
+        $("#tool-bar-top").css("visibility", "hidden");
+        $("#module").tablesorter({
+            sortList: [[1,1],[2,1],[3,1]],
+
+            widthFixed : true,
+
+            widgets: ["filter"],
+
+            // this is the default setting
+            cssChildRow: "tablesorter-childRow",
+
+            widgetOptions : {
+                filter_searchDelay : 300,
+                filter_hideFilters : true,
+                filter_childRows   : false,
+                filter_cssFilter   : 'tablesorter-filter',
+                filter_startsWith  : false,
+                filter_ignoreCase  : true
+            }
+        });
+        $("#patch").tablesorter({
+            sortList: [[2,1], [0,0], [1,0]],
+
+            widthFixed : true,
+
+            widgets: ["zebra", "filter"],
+
+            // this is the default setting
+            cssChildRow: "tablesorter-childRow",
+
+            widgetOptions : {
+                filter_searchDelay : 300,
+                filter_hideFilters : true,
+                filter_childRows   : false,
+                filter_cssFilter   : 'tablesorter-filter',
+                filter_startsWith  : false,
+                filter_ignoreCase  : true
+            }
+        });
+        $('.tablesorter-childRow td').hide();
+        $('.tablesorter').delegate('.toggle', 'click' ,function(){
+            $(this).closest('tr').nextUntil('tr:not(.tablesorter-childRow)').find('td').toggle();
+            return false;
+        });
+        $(".expander").simpleexpand();
+        prettyPrint(function() {
+            $('.patchline').parent().addClass('patch');
+            $("#loading").hide();
+        });
+        var sourceSite = "${SOURCE_SITE}";
+        if (sourceSite) {
+            $("pre.prettyprint").dblclick(function() {
+                window.open(sourceSite + $(this).parent().attr("data-file") + "#" + $(this).attr("data-line-number"), '_blank');
+            });
+            $('pre.prettyprint').attr('title', "Double-click to open full source");
+            $('pre.prettyprint').tooltipster({
+                position: 'left',
+                timer: 5000
+            });
+        }
+        $('#simple-menu').sidr();
+        $('.tip-holder').attr('title', function(){
+            return $(this).next('.tip').html()
+        });
+    });
+    </script>
+</head>
+<body>
+<div id="tool-bar-fixed"></div>
+<div id="tool-bar-top">
+    <div class="tool-bar">
+        <div class="tool-bar-left">
+            <div class="tool-item"><a id="simple-menu" href="#sidr"><img src="${RES}/image/drawer.png" border="0"/></a></div>
+            <div class="tool-item"><h1>Patch Finder</h1></div>
+        </div>
+        <div class="tool-bar-right">
+            <div class="tool-item"><a href="#top"><img src="${RES}/image/to_top.png" border="0"/></a></div>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+</div>
+<div id="loading">
+<img src="${RES}/image/load.gif"/> Loading...
+</div>
+<div class="main">
+
+<div class="card">
+<a name="Summary"></a>
+<h1>Summary</h1>
+${SUMMARY}
+</div>
+
+<div class="card">
+<a name="ModuleList"></a>
+<h1>Module List</h1>
+${MODULE_LIST}
+</div>
+
+<div class="card">
+<a name="CrossModuleSubjectList"></a>
+<h1>Cross-Module Subjects</h1>
+${CROSS_MODULE_SUBJECT_LIST}
+</div>
+
+</div>
+<div id="sidr">
+<ul>
+<li><a href="${RES}/document.html"><img src="${RES}/image/document.png"/> Document</a></li>
+<li><a href="${RES}/download.html"><img src="${RES}/image/download.png"/> Download</a></li>
+<li><a href="${RES}/branches.html"><img src="${RES}/image/branches.png"/> Branches</a></li>
+<li><a href="search.html"><img src="${RES}/image/search.png"/> Search</a></li>
+<li class="active"><a href="index.html"><img src="${RES}/image/modules.png"/> Modules</a>
+<ul>${MODULE_MENU}</ul>
+</li>
+<li><a href="../../../"><img src="${RES}/image/cloud.png"/> CI Server</a>
+<ul>
+<li><a href="../">History</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Document - Patch Finder</title>
+    <link rel="shortcut icon" href="../res/image/favicon.ico" type="image/vnd.microsoft.icon">
+    <link rel="stylesheet" href="../res/css/style.css" type="text/css" />
+    <script type="text/javascript" src="../res/js/jquery-latest.js"></script>
+    <script type="text/javascript" src="../res/js/utility.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        $("#tool-bar-fixed").html($("#tool-bar-top").html());
+        $("#tool-bar-top").css("visibility", "hidden");
+    });    
+    </script>
+</head>
+<body>
+<div id="tool-bar-fixed"></div>
+<div id="tool-bar-top">
+    <div class="tool-bar">
+        <div class="tool-bar-left">
+            <div class="tool-item"><a href="javascript:history.back()"><img src="../res/image/back.png"/></a></div>
+            <div class="tool-item"><h1>Patch Finder > Document</h1></div>
+        </div>
+        <div class="tool-bar-right">
+            <div class="tool-item"><a href="#top"><img src="../res/image/to_top.png" border="0"/></a></div>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+</div>
+
+<div class="main">
+
+<div class="card">
+<a name="Overview"></a>
+<h1>Overview</h1><br/>
+Patch Finder finds the patches from the source code. It generates reports for us to maintain our patches.
+</div>
+
+<div class="card">
+<a name="Format"></a>
+<h1>Format</h1><br/>
+The patches which have the following format can be found by Patch Finder.
+<pre class="patch example">
+<b>//++[Category][Author][Date][Module] Title</b>
+//$ Subject (optional)
+//: Description (line 1) (optional)
+//: Description (line 2) (optional)
+(Your code here)
+<b>//--[Category][Author][Date][Module] Title</b>
+</pre>
+
+<h2>Category</h2>
+One of the following:
+<ul>
+<li>Debug</li>
+<li>Issue Fix</li>
+<li>Feature</li>
+<li>Customization</li>
+<li>Optimization</li>
+<li>Tool</li>
+</ul>
+
+<h2>Author</h2>
+It should be the login name of the Gerrit. It should be the same as the patch owner on the Gerrit.<br/>
+<img src="../res/image/fig_author.png">
+
+<h2>Date</h2>
+It should have the format "YYYY/mm/dd". It is the date you upload the patch.
+
+<h2>Module</h2>
+It should be the same name of the <u>Codebase Module</u> in HPKB. Case sensitive.<br/>
+<img src="../res/image/fig_module.png">
+
+<h2>Title</h2>
+It should be included in the first line of commit message of Git. For example:
+<pre class="example">
+//++[Issue Fix][tiger_huang][2014/04/23][Window Manager] <b><font color="red">Let touch exclude region include on-top system UIs</font></b>
+(code)
+//--[Issue Fix][tiger_huang][2014/04/23][Window Manager] <b><font color="red">Let touch exclude region include on-top system UIs</font></b>
+</pre>
+<img src="../res/image/fig_title.png">
+
+<h2>Subject (optional)</h2>
+If there are multiple patches map to the same subject, then these patches should specify this field, and use the same Subject. One patch can be owned by multiple Subjects (separated by ','). For example:
+<pre class="example">
+//++[Feature][tiger_huang][2014/07/14][Window Manager] Enable other system services to setAppVisibility silently
+//$ <b><font color="red">Share screen</font></b>
+//: In this way, the server won't dispatch visibility to client. This is for share screen feature.
+(Code)
+//--[Feature][tiger_huang][2014/07/14][Window Manager] Enable other system services to setAppVisibility silently
+</pre>
+<pre class="example">
+//++[Feature][johnny_ku][2014/08/01][Input] Modify some code for share screen and glove mode
+//$ <b><font color="red">Share screen</font>, Glove Mode</b>
+(Code)
+//--[Feature][johnny_ku][2014/08/01][Input] Modify some code for share screen and glove mode
+</pre>
+
+<h2>Description (optional)</h2>
+It should be direct under the opening-patch line or under the subject. It can be multiple lines. For example:
+<pre class="example">
+//++[Feature][tiger_huang][2014/07/14][Window Manager] Enable other system services to setAppVisibility silently
+//$ Share screen
+//: <b>In this way, the server won't dispatch visibility to client. This is for share screen feature.</b>
+(Code)
+//--[Feature][tiger_huang][2014/07/14][Window Manager] Enable other system services to setAppVisibility silently
+</pre>
+<pre class="example">
+//++[Feature][johnny_ku][2014/08/01][Input] Modify some code for share screen
+//: <b>Some description</b>
+//: <b>The second line of description</b>
+(Code)
+//: Not the description (because there is a broken line.)
+(Code)
+//--[Feature][johnny_ku][2014/08/01][Input] Modify some code for share screen
+</pre>
+</div>
+
+<div class="card">
+<a name="Rules"></a>
+<h1>Rules</h1>
+<h2>Reduce Redundant</h2>
+Subject and Description only need to be written once. For example:
+<pre class="example">
+//++[Debug][tiger_huang][2014/03/06][Window Manager] Add surface log
+<b>//$ Add log for debug</b>
+<b>//: Add log for us to monitor surface operation</b>
+if (WindowManagerService.DEBUG_HTC) {
+    WindowManagerService.logSurface(mWin, "HIDE", null);
+}
+//--[Debug][tiger_huang][2014/03/06][Window Manager] Add surface log
+</pre>
+<pre class="example">
+//++[Debug][tiger_huang][2014/03/06][Window Manager] Add surface log
+if (WindowManagerService.DEBUG_HTC) {
+    WindowManagerService.logSurface(mWin, "CREATE pid="
+            + mSession.mPid + " format=" + attrs.format + " layer="
+            + mAnimLayer, null);
+}
+//--[Debug][tiger_huang][2014/03/06][Window Manager] Add surface log
+</pre>
+
+<h2>Nested Patches</h2>
+This is allowed:
+<pre class="example">
+//++[a][b][c][d] e
+//++[a][b][c][d] e2
+//--[a][b][c][d] e2
+//--[a][b][c][d] e
+</pre>
+This is not allowed (the inner comment of the patch should be removed):
+<pre class="example">
+//++[a][b][c][d] e
+<font color="red">//++[a][b][c][d] e</font>
+<font color="red">//--[a][b][c][d] e</font>
+//--[a][b][c][d] e
+</pre>
+
+<h2>Tailing "-->"</h2>
+Tailing "-->" will be removed.
+
+<h2>Another Way to Close a Patch</h2>
+<pre class="example">
+//<font color="red">~~</font>[Category][Author][Date][Module] Title
+</pre>
+This is for the reason that the XML document does not allow "--" existing in the comment.
+</div>
+
+<div class="card">
+<a name="OtherLanguages"></a>
+<h1>Other Languages</h1>
+<h2>Android.mk</h2>
+For example:
+<pre class="example">
+<b>#//++[Debug][chilun_huang][2014/05/05][HWUI] Add a property to runtime adjust the cache flush mechanism</b>
+<b>#//: Add userdebug flag to detect the ROM type</b>
+ifeq ($(HTC_DEBUG_FLAG),DEBUG)
+    LOCAL_CFLAGS += -DHTC_DEBUG_FLAG
+endif
+<b>#//--[Debug][chilun_huang][2014/05/05][HWUI] Add a property to runtime adjust the cache flush mechanism</b>
+</pre>
+
+<h2>XML</h2>
+For example:
+<pre class="example">
+<b>&lt;!--  //++[Debug][tiger_huang][2014/03/06][Window Manager] For XML example --></b>
+&lt;string name="hello_world">Hello world!&lt;/string>
+<b>&lt;!--  //~~[Debug][tiger_huang][2014/03/06][Window Manager] For XML example --></b>
+</pre>
+</div>
+
+</div>
+</body>
+</html>

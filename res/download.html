@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Download - Patch Finder</title>
+    <link rel="shortcut icon" href="../res/image/favicon.ico" type="image/vnd.microsoft.icon">
+    <link rel="stylesheet" href="../res/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="../res/css/theme.default.css" type="text/css" />
+    <script type="text/javascript" src="../res/js/jquery-latest.js"></script>
+    <script type="text/javascript" src="../res/js/utility.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        $("#tool-bar-fixed").html($("#tool-bar-top").html());
+        $("#tool-bar-top").css("visibility", "hidden");
+    });    
+    </script>
+</head>
+<body>
+<div id="tool-bar-fixed"></div>
+<div id="tool-bar-top">
+    <div class="tool-bar">
+        <div class="tool-bar-left">
+            <div class="tool-item"><a href="javascript:history.back()"><img src="../res/image/back.png"/></a></div>
+            <div class="tool-item"><h1>Patch Finder > Download</h1></div>
+        </div>
+        <div class="tool-bar-right">
+            <div class="tool-item"><a href="#top"><img src="../res/image/to_top.png" border="0"/></a></div>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+</div>
+
+<div class="main">
+
+<div class="card">
+<a name="Download"></a>
+<h1>Download</h1><br/>
+Please click <a href="PatchFinder.zip" class="external"><b>PatchFinder.zip</b></a> to download the latest version.
+</div>
+
+<div class="card">
+<a name="ChangeLog"></a>
+<h1>Change Log</h1><br/>
+<table class="tablesorter-default">
+<tr><th>Date</th><th>Description</th></tr>
+<tr><td>2015-06-08</td><td>Add favicon.</td></tr>
+<tr><td>2015-06-05</td><td>Export Patch Finder to <a href="https://hichub.htc.com/tiger_huang/PatchFinder" class="external">HICHub</a>.<br/>Update README.</td></tr>
+<tr><td>2015-05-26</td><td>Change the URL of the HPKB link.</td></tr>
+<tr><td>2015-05-06</td><td>Show hints to indicate the incorrect format of patch.</td></tr>
+<tr><td>2015-05-04</td><td>Use margin to separate cards instead of &lt;br><br/>Show summary in the search page.</td></tr>
+<tr><td>2015-04-30</td><td>Let the user can switch to the corresponding page in the different branch.</td></tr>
+<tr><td>2015-04-28</td><td>Convert HPKB#[ID] to the link in description.</td></tr>
+<tr><td>2015-04-24</td><td>Fix a bug in PatchPage which didn't escape '\' in variables in .js files.<br/>Update the branch page.</td></tr>
+<tr><td>2015-04-22</td><td>Let the DOM tree of each page can be modified by Javascript dynamically.<br/>Update the definition of the module name in the document page.<br/>Update the branch page.</td></tr>
+<tr><td>2015-04-20</td><td>Output path is now relative to the config file.<br/>Add scripts to scan all the branches.<br/>Add the new branch for L51 MTK Mainline.</td></tr>
+<tr><td>2015-03-23</td><td>Add the new branch for L51 Mainline.</td></tr>
+<tr><td>2015-02-24</td><td>Update branches.</td></tr>
+<tr><td>2014-11-24</td><td>Let the empty line of source code in the patch can be copied.<br>Remove branch: L MTK 6752 64 Bit; add new branch: L MTK Mainline.</td></tr>
+<tr><td>2014-11-03</td><td>Create new branch: MTK 6752 64 Bit (mtk/l-rel-mtk6752_r2).</td></tr>
+<tr><td>2014-10-16</td><td>Change Android L to Android Lollipop.</td></tr>
+<tr><td>2014-09-24</td><td>Improve the loading time of patch page.</td></tr>
+<tr><td>2014-09-23</td><td>Workaround a rendering bug of Chrome on showing/hiding filtering boxes.<br/>Let module pages can take arguments for filtering.</td></tr>
+<tr><td>2014-09-19</td><td>Add tool-tip to hint users to double-click on the code block to open full source.</td></tr>
+<tr><td>2014-09-18</td><td>Let the patch can redirect the browser to the source site.</td></tr>
+<tr><td>2014-09-16</td><td>Add a new branch: common/master-l-rel-hdkbase</td></tr>
+<tr><td>2014-09-15</td><td>Release source code.<br/>Refine links of subject category of summary in module pages.</td></tr>
+<tr><td>2014-09-12</td><td>Add search page.</td></tr>
+<tr><td>2014-09-11</td><td>Change the style of the drawer menu.<br/>Refactor the tool bar for greater cross-browser compatibility.<br/>Add a page to show single patch.<br/>Dump cached error logs before exiting.<br/>Re-define subject: a stand alone patch is counted as a subject.</td></tr>
+<tr><td>2014-08-27</td><td>Convert the URL text to the link in description.<br/>Let the patch can link to Gerrit even if the title has special characters.</td></tr>
+<tr><td>2014-08-21</td><td>Avoid symbolic links.<br/>Fix a bug of filter.<br/>Add branch page for server.</td></tr>
+<tr><td>2014-08-18</td><td>Enable the user to turn off the debug log (to filter the error log.)<br/>It will exit with non-zero value if there is any error log.</td></tr>
+<tr><td>2014-08-15</td><td>Add drawer menu, tool bar, document and download pages.<br/>Change to Material Design style.</td></tr>
+<tr><td>2014-08-07</td><td>New version of Patch Finder which can parse Category and Subject.</td></tr>
+</table>
+</div>
+
+<div class="card">
+<a name="Usage"></a>
+<h1>Usage</h1>
+<ol>
+<li>Edit config.properties (to specify the input directories/files and the output directory)</li>
+<li>Run run_patch_finder.bat or run_patch_finder.sh</li>
+<li>Use browser to open the output files</li>
+</ol>
+</div>
+
+</div>
+</body>
+</html>

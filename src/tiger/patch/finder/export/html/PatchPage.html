@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Patch Finder > Patch</title>
+    <link rel="shortcut icon" href="${RES}/image/favicon.ico" type="image/vnd.microsoft.icon">
+    <link rel="stylesheet" href="${RES}/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="${RES}/css/theme.default.css" type="text/css" />
+    <link rel="stylesheet" href="${RES}/css/prettify.css" type="text/css" />
+    <link rel="stylesheet" href="${RES}/css/drawer.css" />
+    <link rel="stylesheet" href="${RES}/css/tooltipster.css" />
+    <script type="text/javascript" src="${RES}/js/jquery-latest.js"></script>
+    <script type="text/javascript" src="${RES}/js/simple-expand.min.js"></script>
+    <script type="text/javascript" src="${RES}/js/prettify/prettify.js"></script>
+    <script type="text/javascript" src="${RES}/js/jquery.sidr.min.js"></script>
+    <script type="text/javascript" src="${RES}/js/jquery.tooltipster.min.js"></script>
+    <script type="text/javascript" src="${RES}/js/utility.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        $("#tool-bar-fixed").html($("#tool-bar-top").html());
+        $("#tool-bar-top").css("visibility", "hidden");
+        $('#simple-menu').sidr();
+        var patch_id = getUrlParameter("id");
+        if (patch_id) {
+            loadScript("data/" + getUrlParameter("id") + ".js", function() {
+                $("#p_title").html(p_title);
+                $("#p_author").html(p_author);
+                $("#p_category").html(p_category);
+                $("#p_date").html(p_date);
+                $("#p_module").html(p_module);
+                $("#p_subject").html(p_subject);
+                $("#p_link").html(p_link);
+                $("#p_dscription").html(p_dscription);
+                $("#p_modified").html(p_modified);
+                $(".expander").simpleexpand();
+                prettyPrint(function() {
+                    $('.patchline').parent().addClass('patch');
+                    $("#loading").hide();
+                });
+                var sourceSite = "${SOURCE_SITE}";
+                if (sourceSite) {
+                    $("pre.prettyprint").dblclick(function() {
+                        window.open(sourceSite + $(this).parent().attr("data-file") + "#" + $(this).attr("data-line-number"), '_blank');
+                    });
+                    $('pre.prettyprint').attr('title', "Double-click to open full source");
+                    $('pre.prettyprint').tooltipster({
+                        position: 'right',
+                        timer: 5000
+                    });
+                }
+            });
+        } else {
+            $("#loading").hide();
+            $("#patch_detail").html("<h1>This page requires the argument: <i>id</i></h1><h2>You should be here from a valid link.</h2>");
+        }
+    });
+    </script>
+</head>
+<body>
+<div id="tool-bar-fixed"></div>
+<div id="tool-bar-top">
+    <div class="tool-bar">
+        <div class="tool-bar-left">
+            <div class="tool-item"><a id="simple-menu" href="#sidr"><img src="${RES}/image/drawer.png" border="0"/></a></div>
+            <div class="tool-item"><h1>Patch Finder > Patch</h1></div>
+        </div>
+        <div class="tool-bar-right">
+            <div class="tool-item"><a href="#top"><img src="${RES}/image/to_top.png" border="0"/></a></div>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+</div>
+<div id="loading">
+<img src="${RES}/image/load.gif"/> Loading...
+</div>
+<div class="main">
+
+<div class="card" id="patch_detail">
+<h1 id="p_title"></h1>
+<table class="tablesorter-default" id="patch_detail">
+<tbody>
+<tr><td>Branch</td><td id="p_branch">${BRANCH}</td></tr>
+<tr><td>Author</td><td id="p_author"></td></tr>
+<tr><td>Category</td><td id="p_category"></td></tr>
+<tr><td>Date</td><td id="p_date"></td></tr>
+<tr><td>Module</td><td id="p_module"></td></tr>
+<tr><td>Subject</td><td id="p_subject"></td></tr>
+<tr><td>Links</td><td id="p_link"></td></tr>
+<tr><td>Description</td><td id="p_dscription"></td></tr>
+<tr><td>Modified</td><td id="p_modified"></td></tr>
+</tbody>
+</table>
+</div>
+
+</div>
+<div id="sidr">
+<ul>
+<li><a href="${RES}/document.html"><img src="${RES}/image/document.png"/> Document</a></li>
+<li><a href="${RES}/download.html"><img src="${RES}/image/download.png"/> Download</a></li>
+<li><a href="${RES}/branches.html"><img src="${RES}/image/branches.png"/> Branches</a></li>
+<li><a href="search.html"><img src="${RES}/image/search.png"/> Search</a></li>
+<li><a href="index.html"><img src="${RES}/image/modules.png"/> Modules</a>
+<ul>${MODULE_MENU}
+</ul>
+</li>
+<li><a href="../../../"><img src="${RES}/image/cloud.png"/> CI Server</a>
+<ul><li><a href="../">History</a></li></ul>
+</li>
+</ul>
+</div>
+</body>
+</html>

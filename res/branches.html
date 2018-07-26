@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Patch Finder</title>
+    <link rel="shortcut icon" href="../res/image/favicon.ico" type="image/vnd.microsoft.icon">
+    <link rel="stylesheet" href="../res/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="../res/css/drawer.css">
+    <script type="text/javascript" src="../res/js/jquery-latest.js"></script>
+    <script type="text/javascript" src="../res/js/jquery.sidr.min.js"></script>
+    <script type="text/javascript" src="../res/js/utility.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        $("#tool-bar-fixed").html($("#tool-bar-top").html());
+        $("#tool-bar-top").css("visibility", "hidden");
+        $('#simple-menu').sidr();
+    });    
+    </script>
+</head>
+<body>
+<div id="tool-bar-fixed"></div>
+<div id="tool-bar-top">
+    <div class="tool-bar">
+        <div class="tool-bar-left">
+            <div class="tool-item"><a id="simple-menu" href="#sidr"><img src="../res/image/drawer.png" align="absmiddle" border="0"/></a></div>
+            <div class="tool-item"><h1>Patch Finder > Branches</h1></div>
+        </div>
+        <div class="tool-bar-right">
+            <div class="tool-item"><a href="#top"><img src="../res/image/to_top.png" border="0"/></a></div>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+</div>
+
+<div class="main">
+
+<div class="card">
+<a name="Lollipop"></a>
+<div style="float:right;"><img src="../res/image/lollipop.jpg" vspace="4" hspace="4"></div>
+<h1>Android Lollipop</h1>
+<h2>5.1</h2>
+<ul>
+<li><h3><a class="external" href="http://buildpass.htc.com.tw:8080/view/Report/job/PatchFinder/ws/L51Mainline/latest/index.html">Mainline MR1 (common/master-l-mr1-rel)</a></h3></li>
+<li><h3><a class="external" href="http://buildpass.htc.com.tw:8080/view/Report/job/PatchFinder/ws/L51MTKMainline/latest/index.html">MTK Mainline MR1 (common/master-l-mr1-rel-mtk)</a></h3></li>
+</ul>
+<h2>5.0 <img src="../res/image/time_warning.png" title="Out of date. Last updated: 2015-04-20"></h2>
+<ul>
+<li><h3><a class="external" href="http://buildpass.htc.com.tw:8080/view/Report/job/PatchFinder/ws/L50Mainline/latest/index.html">Mainline (common/master-l-rel))</a></h3></li>
+<li><h3><a class="external" href="http://buildpass.htc.com.tw:8080/view/Report/job/PatchFinder/ws/L50MTKMainline/latest/index.html">MTK Mainline (common/master-l-rel-mtk)</a></h3></li>
+<li><h3><a class="external" href="http://buildpass.htc.com.tw:8080/view/Report/job/PatchFinder/ws/L50StockUI/latest/index.html">Stock UI (common/master-l-rel-stock-ui)</a></h3></li>
+</ul>
+</div>
+
+<div class="card">
+<a name="KitKat"></a>
+<div style="float:right;"><img src="../res/image/kitkat.jpg" vspace="8" hspace="8"></div>
+<h1>Android KitKat</h1>
+<h2>Porting Practice (test/kk-mr2-rel-gep-qct+test-u15-porting) <img src="../res/image/time_warning.png" title="Out of date. Last updated: 2015-04-21"></h2>
+<ul>
+<li><h3><a class="external" href="http://buildpass.htc.com.tw:8080/view/Report/job/PatchFinder/ws/KKtoLPortingPractice/Input.html">Input</a></h3></li>
+<li><h3><a class="external" href="http://buildpass.htc.com.tw:8080/view/Report/job/PatchFinder/ws/KKtoLPortingPractice/ViewRoot.html">ViewRoot</a></h3></li>
+<li><h3><a class="external" href="http://buildpass.htc.com.tw:8080/view/Report/job/PatchFinder/ws/KKtoLPortingPractice/Wallpaper.html">Wallpaper</a></h3></li>
+<li><h3><a class="external" href="http://buildpass.htc.com.tw:8080/view/Report/job/PatchFinder/ws/KKtoLPortingPractice/Window_Manager.html">Window_Manager</a></h3></li>
+</ul>
+<h2>4.4.3 Mainline (common/master-kk-mr2-rel) <img src="../res/image/time_warning.png" title="Out of date. Last updated: 2015-04-21"></h2>
+<ul>
+<li><h3><a class="external" href="http://buildpass.htc.com.tw:8080/view/Report/job/PatchFinder/ws/KK443Mainline/Daydream.html">Daydream</a></h3></li>
+<li><h3><a class="external" href="http://buildpass.htc.com.tw:8080/view/Report/job/PatchFinder/ws/KK443Mainline/Input.html">Input</a></h3></li>
+<li><h3><a class="external" href="http://buildpass.htc.com.tw:8080/view/Report/job/PatchFinder/ws/KK443Mainline/ViewRoot.html">ViewRoot</a></h3></li>
+<li><h3><a class="external" href="http://buildpass.htc.com.tw:8080/view/Report/job/PatchFinder/ws/KK443Mainline/Wallpaper.html">Wallpaper</a></h3></li>
+<li><h3><a class="external" href="http://buildpass.htc.com.tw:8080/view/Report/job/PatchFinder/ws/KK443Mainline/Window_Manager.html">Window_Manager</a></h3></li>
+</ul>
+</div>
+
+</div>
+<div id="sidr">
+  <ul>
+    <li><a href="../res/document.html"><img src="../res/image/document.png"/> Document</a></li>
+    <li><a href="../res/download.html"><img src="../res/image/download.png"/> Download</a></li>
+    <li class="active"><a href="../res/branches.html"><img src="../res/image/branches.png"/> Branches</a></li>
+    <li><a href="../../"><img src="../res/image/cloud.png"/> CI Server</a>
+        <ul>
+            <li><a href="../">History</a></li>
+        </ul>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

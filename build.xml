@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="zip" name="PatchFinder">
+
+    <property name="package.name" value="tiger.patch.finder"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="out.dir" location="${basedir}/out"/>
+    <property name="obj.dir" location="${out.dir}/obj"/>
+    <property name="obj.classes.dir.name" value="classes"/>
+    <property name="obj.classes.dir" location="${obj.dir}/${obj.classes.dir.name}"/>
+    <property name="obj.classes.jar.file.name" value="patch_finder.jar"/>
+    <property name="obj.classes.jar.file" location="${obj.dir}/${obj.classes.jar.file.name}"/>
+    <property name="bin.dir" location="${out.dir}/bin"/>
+    <property name="jar.manifest.file" location="${basedir}/manifest.txt"/>
+    <property name="java.source.dir" value="${basedir}/src"/>
+
+    <target name="clean">
+        <delete dir="${out.dir}"/>
+    </target>
+
+    <target name="compile" depends="clean">
+        <mkdir dir="${obj.classes.dir}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="${obj.classes.dir}" includeantruntime="false">
+            <src path="${java.source.dir}"/>
+        </javac>
+    </target>
+
+    <target name="jar" depends="compile">
+        <jar destfile="${obj.classes.jar.file}" manifest="${jar.manifest.file}" basedir="${obj.classes.dir}">
+            <fileset dir="${java.source.dir}" excludes="**/*.java" erroronmissingdir="false"/>
+        </jar>
+    </target>
+
+    <target name="zip" depends="jar">
+        <mkdir dir="${bin.dir}"/>
+        <zip destfile="${bin.dir}/${ant.project.name}.zip">
+            <zipfileset prefix="${ant.project.name}/res" dir="${basedir}/res"/>
+            <zipfileset prefix="${ant.project.name}/src" dir="${basedir}/src"/>
+            <zipfileset prefix="${ant.project.name}" dir="${basedir}" includes=".classpath"/>
+            <zipfileset prefix="${ant.project.name}" dir="${basedir}" includes=".project"/>
+            <zipfileset prefix="${ant.project.name}" dir="${basedir}" includes="build.xml"/>
+            <zipfileset prefix="${ant.project.name}" dir="${basedir}" includes="config.properties"/>
+            <zipfileset prefix="${ant.project.name}" dir="${basedir}" includes="manifest.txt"/>
+            <zipfileset prefix="${ant.project.name}" dir="${basedir}" includes="README.txt"/>
+            <zipfileset prefix="${ant.project.name}" dir="${basedir}" includes="run_patch_finder.bat"/>
+            <zipfileset prefix="${ant.project.name}" dir="${basedir}" includes="run_patch_finder.sh" filemode="777"/>
+            <zipfileset prefix="${ant.project.name}" dir="${basedir}" includes="classpath"/>
+            <zipfileset prefix="${ant.project.name}" dir="${obj.dir}" includes="${obj.classes.jar.file.name}"/>
+        </zip>
+    </target>
+
+</project>
